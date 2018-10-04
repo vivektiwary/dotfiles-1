@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/shubham/.oh-my-zsh
+export ZSH=/Users/bizongo-admin/.oh-my-zsh
 
 ZSH_THEME="cobalt2"
 COMPLETION_WAITING_DOTS="true"
@@ -20,12 +20,12 @@ hour=`date +"%T"`
 hour=${hour%%:*}
 if [ "$hour" -lt 12 ]
 then
-  echo "Good morning, Shubham."
+  echo "Good morning, Vivek."
 elif [ "$hour" -ge 12 -a "$hour" -lt 17 ]
 then
-  echo "Good Afternoon, Shubham."
+  echo "Good Afternoon, Vivek."
 else
-  echo "Good Evening, Shubham."
+  echo "Good Evening, Vivek."
 fi
 
 echo "----------------------------------------"
@@ -35,15 +35,9 @@ echo "----------------------------------------"
 echo "Current time: `date +"%r %a %d %h %y"`"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export GOPATH=~/projects/go
-export PATH=~/.rbenv/shims:/usr/local/go/bin:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
-
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
-                 killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
-                 killall Finder /System/Library/CoreServices/Finder.app'
+. `brew --prefix`/etc/profile.d/z.sh

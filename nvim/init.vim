@@ -1,4 +1,6 @@
 " set t_Co=256                  "enable 256 colors
+source ~/.config/nvim/general.vim "contains important setting for everything to work
+
 set hidden
 
 "install vim-plug if not installed already
@@ -9,40 +11,85 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
+
+Plug 'tpope/vim-rails', { 'for': 'ruby' }          " was not working, enable it sometimes later
+Plug 'kana/vim-textobj-user'                       " requires for custom text object
+Plug 'vim-ruby/vim-ruby'                           " Vim/ Ruby configuration files for ruby
+Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}  " ruby code Completion
+Plug 'Shougo/deoplete-rct', { 'for' : 'ruby'}      " ruby code completion using rcodetools gem
+Plug 'tpope/vim-rbenv'                             " Rbenv support for vim
+Plug 'tpope/vim-bundler'                           " Bundler support for vim
+Plug 'nelstrom/vim-textobj-rubyblock'              " text object facility for ruby blocks
+Plug 'tpope/vim-dispatch'                          " asynchronous calls from vim rails
+Plug 'thoughtbot/vim-rspec'                        " Run rspec from vim
+
+Plug 'Shougo/denite.nvim'                          " Dark powered alternative for unite vim to unite all interfaces
+
+Plug 'honza/vim-snippets'
+Plug 'tomtom/tcomment_vim'                         " source for gcc command for comments
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'                                                        "needed by fugitive to browse the file on github/remote
+
+Plug 'zchee/deoplete-jedi'                         " completion for python
+Plug 'Shougo/neco-vim'                             " vim code Completion
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " Javascript autocompletion
+
+Plug 'mtth/scratch.vim'                            " put anything in scratch buffer, no need to create any file
+Plug 'mattn/emmet-vim'                             " emmet support for vim
+Plug 'SirVer/ultisnips'                            " snippet pluggin
+Plug 'tpope/vim-surround'                          " change or delete surrounding text
+Plug 'flazz/vim-colorschemes'
+Plug 'yggdroot/indentline'
+Plug 'Raimondi/delimitMate'                        " Provides automatic closing quotes, parens
+Plug 'tpope/vim-endwise'                           " Adds end to ruby code
+Plug 'airblade/vim-gitgutter'                      " Git gutter support for vim
+Plug 'euclio/vim-markdown-composer', { 'for': 'markdown' }                " Better than vim-markdown-preview
+Plug 'vim-scripts/Rename'                          " Rename a file in buffer and on disk
+Plug 'vim-scripts/BufOnly.vim'                     " delete all buffers but current one
+Plug 'pbrisbin/vim-mkdir'                          " Automatic creating non-existant directories
+Plug 'ngmy/vim-rubocop'                            " RoboCop syntax checker
+Plug 'rainerborene/vim-reek'                       " Reek code smell checker
+Plug 'tpope/vim-haml'                              " Latest HAML support
+Plug 'tpope/vim-obsession'                         " vim session management
+Plug 'octol/vim-cpp-enhanced-highlight'            " cpp highlighting
+Plug 'pseewald/vim-anyfold'
+
+Plug 'skywind3000/asyncrun.vim'                    " run system commands asynchronously
+Plug 'othree/javascript-libraries-syntax.vim'      " library syntax for vim
+
+" Plug 'othree/yajs.vim'                             " syntax library for javascript
+" Plug 'othree/es.next.syntax.vim'                   " for es next features, required by yajs
+Plug 'mxw/vim-jsx'                                 " jxs support in neovim
+Plug 'pangloss/vim-javascript'
+
+" Plug 'jelera/vim-javascript-syntax'                " Enhanced javascript syntax support for vim
+Plug 'styled-components/vim-styled-components'     " support for styled components react in vim
+Plug 'hail2u/vim-css3-syntax'                      " css3 support for vim
+Plug 'alvan/vim-closetag'                          " Auto close tag for jsx components
+
+Plug 'sheerun/vim-polyglot'                        " A collection of language pack for vim for syntax highlighting, indentation etc
+Plug 'rakr/vim-one'                                " Theme for vim
+Plug 'yegappan/greplace'
+
 Plug 'tpope/vim-abolish'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chrisbra/csv.vim'
-" Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'thaerkh/vim-workspace'
-Plug 'Yggdroot/indentLine'
 Plug 'avakhov/vim-yaml'
 Plug 'terryma/vim-smooth-scroll'
-Plug 'neomake/neomake'
-Plug 'Raimondi/delimitMate'
-Plug 'duff/vim-bufonly'
-Plug 'airblade/vim-gitgutter'
+Plug 'neomake/neomake', { 'do': 'npm install eslint; gem install rubocop; gem install reek'} " asynchronous linting in neovim
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'thoughtbot/vim-rspec'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 "Automatic creation of ctags upon opening of a project
 Plug 'ludovicchabant/vim-gutentags'
 
 " Changes for javascript
-" ================ Turn Off Swap Files ============== {{{
 
-Plug 'skywind3000/asyncrun.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Quramy/tsuquyomi'
 
@@ -54,6 +101,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'vim-scripts/AnsiEsc.vim'
 
+Plug 'ntpeters/vim-better-whitespace'              " remove whitespace; not good as it is bit slow, moving to a git commit hook
 " }}}
 "
 " Plug 'gabrielelana/vim-markdown'
@@ -66,219 +114,84 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'               "Always load this in last
 
+""" Plugins for Java Development
+Plug 'artur-shaik/vim-javacomplete2'               " Completion for java
+Plug 'sbdchd/neoformat'                            " Code formatter for NeoVim
+Plug 'vim-jp/vim-java'                             " Syntax highlighting fix for java
+Plug 'vim-scripts/cSyntaxAfter'                    " better highlight for c-family languages
+
+""" Colorschemes for vim
+Plug 'joshdick/onedark.vim'                        " One dark theme for vim
+Plug 'drewtempelmeyer/palenight.vim'               " Colorscheme for vim
+Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
+Plug 'wesgibbs/vim-irblack'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" Plug 'https://github.com/vim-scripts/ScrollColors'
+" Plug 'myjoytou/YouCompleteMe'                      " Using forked version of
+" YCM as it was causing the backspace in delimitmate to break and both quotes
+" were not getting deleted correctly, when using :DelimitMateText, it got
+" caught
+" Plug 'Valloric/YouCompleteMe'                      " Completion engine for vim
+" Plug 'osyo-manga/vim-monster'                      " ruby code completion
+" Plug 'vim-syntastic/syntastic'                     " syntax linting support for vim
+" Plug 'w0rp/ale'                                    " Seems better than neomake
+" Plug 'dyng/ctrlsf.vim'                             " Search every where ctrl shift f functionality like sublime
+" Plug 'terryma/vim-multiple-cursors'                " press ctrl n for selecting multiple similar words at a time
+" Plug 'epilande/vim-react-snippets'
+" Plug 'epilande/vim-es2015-snippets'
+" Plug 'ternjs/tern_for_vim'                         " completion engine for javascript
+" Plug 'vim-scripts/taglist.vim'                     " Source code browser
+" Plug 'JamshedVesuna/vim-markdown-preview'          " Previewing markdown without leaving vim
+" Plug 'jceb/vim-orgmode'                            " Todo list in vim like emacs org mode
+" Plug 'tpope/vim-speeddating'                       " dependency for vim-orgmode
+" Plug 'godlygeek/tabular'                           " plugin to auto align things
+" Plug 'easymotion/vim-easymotion'                   " easy motion for vim, which removes <number> out of <number>w and uses <leader><leader> to trigger
+
+
+" Plug 'Quramy/vim-js-pretty-template'               " template string syntax support for javascript
+" Plug 'tpope/vim-abolish'                           " easily search for, substitute, and abbreviate multiple variants of a word
+" Plug 'wikitopian/hardmode'                         " disable h,j,k,l and arrow keys in vim
+" Plug 'skwp/greplace.vim'                           " Search and replace across all files interactively
+" Plug 'chrisbra/csv.vim'                            " CSV support for VIM
+" Plug 'vim-scripts/IndexedSearch'                   " shows 'Nth match out of M' at every search (index of match+total # matches)
+" Plug 'vim-scripts/Specky'                          " Functions to help make behavioral testing easy with ruby and rspec, it was too old
+" Plug 'garbas/vim-snipmate'                         " Not very good as ultisnip will replace it
+" Plug 'MarcWeber/vim-addon-mw-utils'                " Required by snipmate
+" Plug 'tomtom/tlib_vim'                             " Required by snipmate. This library provides some utility functions. There isn't much need to  install it unless another plugin requires you to do so. NOT SO IMPORTANT
+" Plug 'majutsushi/tagbar'      " Display tags in a window ordered by scope,
+" there was some problem with this plugin
+" Plug 'xolox/vim-easytags'     " Automatic generation of ctags
+" Plug 'xolox/vim-misc'                              " Required by vim easytags
+" Plug 'alvan/vim-closetag'   " Auto close html tags. No use!!!
+" Plug 'thaerkh/vim-workspace'   " Auto save files and Sessions
+" Plug 'vim-scripts/SyntaxComplete'
+" Plug 'tpope/vim-dispatch'      " Plug for async call using vim
+" Plug 'vim-scripts/ShowMarks'   " Plug for showing marks set by m
+" Plug 'vim-scripts/project.tar.gz' " not required
+" Plug 'vim-scripts/DfrankUtil'
+" Plug 'vim-scripts/vimprj'
+" Plug 'vim-scripts/indexer.tar.gz'
+" Plug 'justinmk/vim-syntax-extra'
+
 call plug#end()
 
-"sql completion turn off
-let g:loaded_sql_completion = 0
-let g:omni_sql_no_default_maps = 1
-
-"Vim rspec settings
-let g:rspec_command = "AsyncRun bin/rspec {spec}"
-"Deoplete and ternjs settings
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-
-let g:deoplete#sources#tss#javascript_support = 1
-let g:tsuquyomi_javascript_support = 1
-let g:tsuquyomi_auto_open = 1
-let g:tsuquyomi_disable_quickfix = 1
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-" for vim neomake
-call neomake#configure#automake('rw', 1000)
 " color janah
-colorscheme hybrid_material
+" colorscheme hybrid_material
+color molokai
 set background=dark                                                             "Set background to dark
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
-" use <Option-o> and <Option-O> to insert new lines in insert mode
-imap ø <Esc>o
-imap Ø <Esc>O
-
-" use Ag, the silver searcher with ack.vim
-" let g:ackprg = 'ag --nogroup --nocolor --column'
-
-
-let g:mapleader = ","           						                                    "Change leader to a comma
-
 let g:enable_bold_font = 1      						                                    "Enable bold font in colorscheme
 let g:enable_italic_font = 1    						                                    "Enable italic font in colorscheme
 
-" DelimitMate settings
-let g:delimitMate_expand_space = 1
-let g:delimitMate_expand_cr = 2
-" let g:airline_theme = 'hybrid'
-" "set the theme for alirline
-" Settings
-filetype plugin indent on							                                          "Enable plugins and indents by filetype
-set termguicolors
-set title                       						                                    "change the terminal's title
-set clipboard=unnamed           						                                    "To enable copy paste in vim
-syntax enable                   						                                    "Turn on syntax highlighting
-set number	                						                                        "set the line number
-set backspace=indent,eol,start  						                                    "Backspace over everything
-set mouse=a                     						                                    "enabling mouse suppport
-set wildmode=longest,list,full  						                                    "bash-like tab completion.
-set wildmenu                    						                                    "first tab completes, second provides a list, third cycles through the options
 
-"relative line numbers start
-set number relativenumber
+source ~/.config/nvim/plugins.vim " Settings for the plugins
+source ~/.config/nvim/keys.vim " Settings for custom key mapping
+source ~/.config/nvim/custom_commands.vim
 
-" we are using auto cmd group because if the same autocmd has been
-" defined twice in vimrc, vim will not replace the earlier one, it
-" will keep both. So auto cmd groups will remove this possibility.
-" The first command 'autocmd!' clears everything in the group.
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
-" relative line number end
-
-set wrap
-set linebreak                                                                   "Wrap lines at convenient points
-set listchars=tab:\ \ ,trail:·                                                  "Set trails for tabs and spaces
-set list                                                                        "Enable listchars
-" set lazyredraw                                                                  "Do not redraw on registers and macros
-" set conceallevel=2 concealcursor=i                                              "neosnippets conceal marker
-set inccommand=split                                                            "Show substitute changes immidiately in separate split
-set fillchars+=vert:\│                                                          "Make vertical split separator full line
-
-set history=500									                                                "show lots of cmd line history
-set gcr=a:blinkon500-blinkwait500-blinkoff500 					                        "set cursor blinking rate
-set cursorline
-set smartcase                                                                   "Smart case search if there is uppercase
-set ignorecase                                                                  "case insensitive search
-
-set showmatch                                                                   "Highlight matching bracket
-set splitright                                                                  "Set up new vertical splits positions
-set splitbelow                                                                  "Set up new horizontal splits positions
-
-set path+=**                                                                    "Allow recursive search
-set pumheight=30                                                                "Maximum number of entries in autocomplete popup
-set ttimeoutlen=0                                                               "Reduce Command timeout for faster escape and O
-set fileencoding=utf-8                                                          "Set utf-8 encoding on write
-
-"Highlight Search
-" highlight Search ctermbg=208 ctermfg=Black cterm=NONE
-set hlsearch
-
-set updatetime=0
-
-" Highlight trailing spaces.
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-
-" https://github.com/thaerkh/vim-workspace/issues/9 disabling trimming of
-" whitespaces
-" let g:workspace_autosave_untrailspaces = 0
-" match                         "Disable above highlighting
-
-
-" ================ Turn Off Swap Files ============== {{{
-
-set noswapfile
-set nobackup
-set nowb
-
-" }}}
-
-" ================ Indentation ====================== {{{
-
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-set smartindent
-set nofoldenable
-set colorcolumn=80
-
-" }}}
-
-" ================ Scrolling ======================== {{{
-
-set scrolloff=8                                                                 "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=5
-
-" }}}
-"
-" ================ Abbreviations ==================== {{{
-
-cnoreabbrev Wq wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qa qa
-cnoreabbrev Bd bd
-cnoreabbrev bD bd
-cnoreabbrev wrap set wrap
-cnoreabbrev nowrap set nowrap
-cnoreabbrev bda BufOnly
-cnoreabbrev f find
-cnoreabbrev F find
-
-" }}}
-
-" Remap keys for switching between buffers
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-map <C-n> :NERDTreeToggle<CR>
-nnoremap rin :NERDTree %<CR>
-
-nnoremap .. :FZF<CR>
-nnoremap ,, :Ag<CR>
-
-" bind cp command to copy the path of the current file
-nnoremap cp :let @+ = expand("%")<CR>
-
-"bind <ESC><ESC> to close the terminal window
-" tnoremap <ESC><ESC> <C-\><C-n>
-
-" Airline configuration
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamenod = ':t'
-let g:airline_powerline_fonts = 1
-
-"enabling displaying index of the buffer.
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <S-Tab> <Plug>AirlineSelectPrevTab
-nmap <Tab> <Plug>AirlineSelectNextTab
-nmap <leader>d :bd\|bd #<CR>
-nmap <leader>s :Buffers<CR>
-
-"mappings for vim-go
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+" project wise vimrc file
+set exrc

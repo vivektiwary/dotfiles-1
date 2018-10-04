@@ -20,7 +20,6 @@
   - name: Install neovim
     homebrew:
       name: neovim
-      install_options: HEAD
 
   - name: Install other utilities
     homebrew: name={{ item }}
@@ -59,14 +58,14 @@
 
   - name: Symlink the config files for zsh and neovim
     file:
-      src: "$HOME/dotfiles/.zshrc"
+      src: "$HOME/dotfiles-1/.zshrc"
       dest: "$HOME/.zshrc"
       state: link
       force: yes
 
   - name: Symlink the cobalt theme to oh my zsh
     file:
-      src: "$HOME/dotfiles/cobalt2.zsh-theme"
+      src: "$HOME/dotfiles-1/cobalt2.zsh-theme"
       dest: "$ZSH/themes/cobalt2.zsh-theme"
       state: link
       force: yes
@@ -75,12 +74,12 @@
     git:
       repo: https://github.com/zsh-users/zsh-autosuggestions
       dest: "$ZSH/custom/plugins/zsh-autosuggestions"
- 
+
   - name: Clone zsh-completions to oh-my-zsh
     git:
       repo: https://github.com/zsh-users/zsh-completions
       dest: "$ZSH/custom/plugins/zsh-completions"
-      
+
   - name: get the afterglow themeto home directory
     get_url:
       url: https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Afterglow.itermcolors
@@ -88,49 +87,81 @@
 
   - name: Symlink the neovim config files
     file:
-      src: "$HOME/dotfiles/nvim/init.vim"
+      src: "$HOME/dotfiles-1/nvim/init.vim"
       dest: "$HOME/.config/nvim/init.vim"
       state: link
       force: yes
 
+  - name: Symlink the neovim config files dealing with general settings
+    file:
+      src: "$HOME/dotfiles-1/nvim/general.vim"
+      dest: "$HOME/.config/nvim/general.vim"
+      state: link
+      force: yes  
+
+  - name: Symlink the part of neovim config dealing with plugins
+    file:
+      src: "$HOME/dotfiles-1/nvim/plugins.vim"
+      dest: "$HOME/.config/nvim/plugins.vim"
+      state: link
+      force: yes
+
+  - name: Symlink the part of neovim config dealing with keys binding
+    file:
+      src: "$HOME/dotfiles-1/nvim/keys.vim"
+      dest: "$HOME/.config/nvim/keys.vim"
+      state: link
+      force: yes
+
+  - name: Symlink the part of neovim config dealing with custom commands
+    file:
+      src: "$HOME/dotfiles-1/nvim/custom_commands.vim"
+      dest: "$HOME/.config/nvim/custom_commands.vim"
+      state: link
+      force: yes
+
+
   - name: Symlink the neovim colorscheme
     file:
-      src: "$HOME/dotfiles/nvim/colors"
+      src: "$HOME/dotfiles-1/nvim/colors"
       dest: "$HOME/.config/nvim/colors"
       state: link
       force: yes
 
+  - name: Initialize z on shell init
+    lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
+
   - name: Symlink the gitignore file
     file:
-      src: "$HOME/dotfiles/.gitignore"
+      src: "$HOME/dotfiles-1/.gitignore"
       dest: "$HOME/.gitignore_global"
       state: link
       force: yes
 
   - name: Symlink the git_template directory
     file:
-      src: "$HOME/dotfiles/.git_template"
+      src: "$HOME/dotfiles-1/.git_template"
       dest: "$HOME/.git_template"
       state: link
       force: yes
 
   - name: Symlink the git config file
     file:
-      src: "$HOME/dotfiles/.gitconfig"
+      src: "$HOME/dotfiles-1/.gitconfig"
       dest: "$HOME/.gitconfig"
       state: link
       force: yes
 
   - name: Symlink the short dir alias file
     file:
-      src: "$HOME/dotfiles/short-dir.zsh"
+      src: "$HOME/dotfiles-1/short-dir.zsh"
       dest: "$ZSH/custom/short-dir.zsh"
       state: link
       force: yes
 
   - name: Symlink the docker alias file
     file:
-      src: "$HOME/dotfiles/docker-rails.zsh"
+      src: "$HOME/dotfiles-1/docker-rails.zsh"
       dest: "$ZSH/custom/docker-rails.zsh"
       state: link
       force: yes

@@ -1,6 +1,6 @@
 [user]
-	name = Shubham Shukla
-	email = snkshukla@gmail.com
+	name = Vivek Kumar
+	email = vivek.kumar@bizongo.in
 [pull]
   rebase = true
 [push]
@@ -9,7 +9,7 @@
   autosquash = true
   autostash = true
 [github]
-	user = snkshukla
+	user = vivektiwary
 [rerere]
   enabled = true
 [core]
@@ -17,7 +17,7 @@
 	editor = vim
 [commit]
   template = ~/.gitmessage
-	gpgsign = true
+	# gpgsign = true # We are not signing with the gpg right now
 [color]
   ui = true
 [init]
