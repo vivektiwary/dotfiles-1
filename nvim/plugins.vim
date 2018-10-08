@@ -3,11 +3,12 @@ augroup nerdtree
   autocmd!
   autocmd StdinReadPre * let s:std_in=1
   noremap <C-b> :NERDTreeToggle<CR>
+  nnoremap rin :NERDTree %<CR>   "open nerd tree for current dir
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
-map <C-n> :NERDTreeToggle<CR>
-nnoremap rin :NERDTree %<CR>   "open nerd tree for current dir
+" close nerdtree after file gets opened
+let NERDTreeQuitOnOpen=1
 " }}}
 
 

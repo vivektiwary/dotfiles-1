@@ -36,8 +36,16 @@ echo "Current time: `date +"%r %a %d %h %y"`"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# using ripgrep as it is bit faster
+# export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 . `brew --prefix`/etc/profile.d/z.sh
+
+alias cat='bat'
+alias help='tldr'

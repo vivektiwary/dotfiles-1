@@ -32,6 +32,22 @@
       - node
       - diff-so-fancy
 
+  - name: Install bat which is a better alternative for cat
+    homebrew:
+      name: bat
+
+  - name: Install htop which is a better alternative for top
+    homebrew:
+      name: htop
+
+  - name: Install fd which is a better alternative for find
+    homebrew:
+      name: fd
+
+  - name: Install tldr which is a better alternative for help
+    homebrew:
+      name: tldr
+
   - name: Add node support for neovim
     npm:
       name: neovim
@@ -97,7 +113,7 @@
       src: "$HOME/dotfiles-1/nvim/general.vim"
       dest: "$HOME/.config/nvim/general.vim"
       state: link
-      force: yes  
+      force: yes
 
   - name: Symlink the part of neovim config dealing with plugins
     file:
@@ -130,6 +146,12 @@
 
   - name: Initialize z on shell init
     lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
+
+  - name: Alias cat for bat
+    lineinfile: dest=~/.zshrc line="alias cat='bat'"
+
+  - name: Alias man for tldr
+    lineinfile: dest=~/.zshrc line="alias help='tldr'"
 
   - name: Symlink the gitignore file
     file:
