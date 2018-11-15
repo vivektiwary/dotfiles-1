@@ -92,7 +92,7 @@ let g:fzf_tags_command = 'ctags -R'
 
 " [Commands] --expect expression for directly executing the command
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-nnoremap .. :FZF<CR>
+nnoremap mm :FZF<CR>
 " }}}
 
 
@@ -156,7 +156,12 @@ let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeErrorMsg'}
 " }}}
 
 "Vim rspec settings
-let g:rspec_command = "AsyncRun bin/rspec {spec}"
+" let g:rspec_command = "AsyncRun bin/rspec {spec}"
+" let g:rspec_command = "Dispatch rspec {spec}"
+
+" for using iTerm
+" let g:rspec_runner = "os_x_iterm"
+noremap <leader>t :call RunCurrentSpecFile()<CR>
 
 " setting for vim-closetag {{{
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
@@ -184,3 +189,6 @@ set statusline+=%*
 " better space for removing spaces
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+
+" {{{ Vim-Fugitive
+noremap gst :Gstatus <CR>

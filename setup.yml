@@ -62,6 +62,10 @@
       name: neovim
       executable: pip3
 
+  - name: Browse gem source code with vim
+    gem:
+      name: 'gem-ctags'
+
   - name: Remove the default zshrc file
     file:
       path: ~/.zshrc
@@ -133,6 +137,13 @@
     file:
       src: "$HOME/dotfiles-1/nvim/custom_commands.vim"
       dest: "$HOME/.config/nvim/custom_commands.vim"
+      state: link
+      force: yes
+
+  - name: Symlink snippets for rails
+    file:
+      src: "$HOME/dotfiles-1/nvim/custom_snippets/rails.snippets"
+      dest: "$HOME/.config/nvim/custom_snippets/rails.snippets"
       state: link
       force: yes
 

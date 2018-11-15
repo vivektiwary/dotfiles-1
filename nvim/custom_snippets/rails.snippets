@@ -1,0 +1,21 @@
+snippet itb "it { }"
+it { $1 }
+endsnippet
+
+snippet etb "is_expected.to belong_to"
+is_expected.to belong_to :$1
+endsnippet
+
+
+snippet ethm "is_expected.to have_many"
+is_expected.to have_many :$1
+endsnippet
+
+snippet evp "is_expected.to validate_presence_of"
+is_expected.to validate_presence_of :$1
+endsnippet
+
+snippet fsl "frozen_string_literal: true"
+# frozen_string_literal: true
+$0
+endsnippet

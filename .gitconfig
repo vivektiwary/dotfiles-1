@@ -14,7 +14,7 @@
   enabled = true
 [core]
   excludesfile = ~/.gitignore_global
-	editor = vim
+	editor = nvim
 [commit]
   template = ~/.gitmessage
 	# gpgsign = true # We are not signing with the gpg right now

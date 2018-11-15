@@ -49,3 +49,15 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias cat='bat'
 alias help='tldr'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+### LESS ###
+# Enable syntax-highlighting in less.
+# brew install source-highlight
+# First, add these two lines to ~/.bashrc
+
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
+export LESS=' -R -X -F '
