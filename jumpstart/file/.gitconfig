@@ -1,0 +1,20 @@
+[user]
+  name = Your Name
+  email = your-email@bangthetable.com
+[pull]
+  rebase = true
+[push]
+  default = current
+[rebase]
+  autosquash = true
+  autostash = true
+[github]
+  user = your-username
+[rerere]
+  enabled = true
+[core]
+  excludesfile = ~/.gitignore_global
+[commit]
+  template = ~/.gitmessage
+[color]
+  ui = true
