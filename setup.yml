@@ -17,20 +17,27 @@
     homebrew_cask:
       name: font-firacode-nerd-font
 
-  - name: Install neovim
-    homebrew:
-      name: neovim
+  #- name: Install neovim
+    #homebrew:
+      #name: neovim
 
   - name: Install other utilities
-    homebrew: name={{ item }}
-    with_items:
-      - ruby
-      - rbenv
-      - zsh-syntax-highlighting
-      - ctags
-      - fortune
-      - node
-      - diff-so-fancy
+    homebrew:
+      name: [
+        'ruby',
+        'rbenv',
+        'zsh-syntax-highlighting',
+        'ctags',
+        'fortune',
+        'node',
+        'diff-so-fancy',
+        'ninja',
+        'libtool',
+        'automake',
+        'cmake',
+        'pkg-config',
+        'gettext'
+      ]
 
   - name: Install bat which is a better alternative for cat
     homebrew:
