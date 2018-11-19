@@ -17,9 +17,24 @@
     homebrew_cask:
       name: font-firacode-nerd-font
 
-  #- name: Install neovim
-    #homebrew:
-      #name: neovim
+  # - name: Install neovim
+  #   homebrew:
+  #     name: neovim
+
+  - name: Unlink imagemagic if any
+    homebrew:
+      name: 'imagemagick'
+      state: unlinked
+
+  - name: Install imagemagic 6, as it is compatible with rmagic gem
+    homebrew:
+      name: 'imagemagick@6'
+
+  - name: Force link imagemagic 6
+    homebrew:
+      name: 'imagemagick@6'
+      state: linked
+      force: yes
 
   - name: Install other utilities
     homebrew:
@@ -36,7 +51,8 @@
         'automake',
         'cmake',
         'pkg-config',
-        'gettext'
+        'gettext',
+        'postgresql'
       ]
 
   - name: Install bat which is a better alternative for cat
