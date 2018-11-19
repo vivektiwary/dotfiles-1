@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/bizongo-admin/.oh-my-zsh
+export ZSH=/Users/vivekkumar/.oh-my-zsh
 
 ZSH_THEME="cobalt2"
 COMPLETION_WAITING_DOTS="true"
