@@ -10,6 +10,8 @@ nnoremap <leader>q :wq<CR>
 vnoremap <leader>q <Esc>:wq<CR>gv
 inoremap <leader>q <Esc>:wq<CR>
 
+nnoremap <leader>c :
+
 " mapping esc key to jk
 inoremap jk <esc>
 " removing esc key property to learn new mapping

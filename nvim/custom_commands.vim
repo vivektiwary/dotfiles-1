@@ -11,10 +11,18 @@ augroup vim_rc_write
   autocmd BufWritePost ~/.config/nvim/init.vim silent! !cp % ~/dotfiles/init.vim
 
   " Sourcing vimrc when written
-  autocmd BufWritePost ~/.config/nvim/init.vim :source $MYVIMRC
+  autocmd BufWritePost ~/.config/nvim/*.vim :source $MYVIMRC
 augroup END
 
 " }}}
+
+" this is a hack as rails vim syntax highlighting
+" was somehow not working in the specs.
+augroup ruby_file_with_syntax
+  autocmd!
+  autocmd BufRead *_spec.rb setlocal syntax=on
+  autocmd BufRead **/forms/*.rb setlocal syntax=on
+augroup END
 
 " Markdown auto folds {{{
 augroup filetype_markdown

@@ -1,5 +1,9 @@
 filetype plugin indent on							                                          "Enable plugins and indents by filetype
 syntax enable                   						                                    "Turn on syntax highlighting
+" syntax on                   						                                    "Turn on syntax highlighting
+" if !exists("g:syntax_on")
+"     syntax enable
+" endif
 
 " colorscheme ubaryd
 " colorscheme janah

@@ -11,11 +11,21 @@ snippet ethm "is_expected.to have_many"
 is_expected.to have_many :$1
 endsnippet
 
-snippet evp "is_expected.to validate_presence_of"
+snippet etvp "is_expected.to validate_presence_of"
 is_expected.to validate_presence_of :$1
 endsnippet
 
-snippet fsl "frozen_string_literal: true"
-# frozen_string_literal: true
-$0
+snippet etvu "is_expected.to validate_uniqueness_of"
+is_expected.to validate_uniqueness_of :$1
+endsnippet
+
+# snippet fsl "frozen_string_literal: true"
+# # frozen_string_literal: true
+# $0
+# endsnippet
+
+snippet init "def initialize"
+def initialize${1:${VISUAL:()}$2}
+	$3
+end
 endsnippet

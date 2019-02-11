@@ -15,7 +15,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-rails', { 'for': 'ruby' }          " was not working, enable it sometimes later
 Plug 'kana/vim-textobj-user'                       " requires for custom text object
 Plug 'vim-ruby/vim-ruby'                           " Vim/ Ruby configuration files for ruby
-Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}  " ruby code Completion
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}} " another code completion library with language server protocol support
+" Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}  " ruby code Completion
 Plug 'Shougo/deoplete-rct', { 'for' : 'ruby'}      " ruby code completion using rcodetools gem
 Plug 'tpope/vim-rbenv'                             " Rbenv support for vim
 Plug 'tpope/vim-bundler'                           " Bundler support for vim
@@ -80,7 +81,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'chrisbra/csv.vim'
 Plug 'avakhov/vim-yaml'
 Plug 'terryma/vim-smooth-scroll'
-Plug 'neomake/neomake', { 'do': 'npm install eslint; gem install rubocop; gem install reek'} " asynchronous linting in neovim
+Plug 'neomake/neomake', { 'do': 'npm install eslint; gem install rubocop'} " asynchronous linting in neovim
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'thoughtbot/vim-rspec'
@@ -183,6 +184,7 @@ call plug#end()
 " color janah
 " colorscheme hybrid_material
 color molokai
+" color vividchalk
 set background=dark                                                             "Set background to dark
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
@@ -191,6 +193,7 @@ let g:enable_bold_font = 1      						                                    "Enabl
 let g:enable_italic_font = 1    						                                    "Enable italic font in colorscheme
 
 
+source ~/.config/nvim/rails_projections.vim
 source ~/.config/nvim/plugins.vim " Settings for the plugins
 source ~/.config/nvim/keys.vim " Settings for custom key mapping
 source ~/.config/nvim/custom_commands.vim

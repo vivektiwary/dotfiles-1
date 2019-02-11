@@ -21,10 +21,16 @@
   #   homebrew:
   #     name: neovim
 
+  # - name: Check if imagemagic is present
+  #   command: brew ls --versions imagemagick
+  #   register: result
+  #   ignore_errors: True
+
   - name: Unlink imagemagic if any
     homebrew:
       name: 'imagemagick'
       state: unlinked
+    ignore_errors: True
 
   - name: Install imagemagic 6, as it is compatible with rmagic gem
     homebrew:
@@ -34,7 +40,11 @@
     homebrew:
       name: 'imagemagick@6'
       state: linked
-      force: yes
+
+  - name: Install universal ctags which is the maintained version of exeburant ctags
+    homebrew:
+      name: 'universal-ctags/universal-ctags/universal-ctags'
+      state: head
 
   - name: Install other utilities
     homebrew:
@@ -42,7 +52,6 @@
         'ruby',
         'rbenv',
         'zsh-syntax-highlighting',
-        'ctags',
         'fortune',
         'node',
         'diff-so-fancy',
@@ -99,6 +108,23 @@
       path: ~/.config/nvim/
       state: directory
 
+  - name: Create custom_snippets directory for neovim
+    file:
+      path: ~/.config/nvim/custom_snippets/
+      state: directory
+
+  - name: Create .ctags.d directory
+    file:
+      path: ~/.ctags.d/
+      state: directory
+
+  - name: Symlink the common.ctags files for ctags
+    file:
+      src: "$HOME/dotfiles-1/common.ctags"
+      dest: "$HOME/.ctags.d/common.ctags"
+      state: link
+      force: yes
+
   - name: Symlink the config files for zsh and neovim
     file:
       src: "$HOME/dotfiles-1/.zshrc"
@@ -122,6 +148,18 @@
     git:
       repo: https://github.com/zsh-users/zsh-completions
       dest: "$ZSH/custom/plugins/zsh-completions"
+
+  - name: Clone spaceship-prompt to oh-my-zsh
+    git:
+      repo: https://github.com/denysdovhan/spaceship-prompt
+      dest: "$ZSH/custom/themes/spaceship-prompt"
+
+  - name: Symlink spaceship theme to zsh
+    file:
+      src: "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme"
+      dest: "$ZSH/custom/themes/spaceship.zsh-theme"
+      state: link
+      force: yes
 
   - name: get the afterglow themeto home directory
     get_url:
@@ -167,6 +205,13 @@
     file:
       src: "$HOME/dotfiles-1/nvim/custom_snippets/rails.snippets"
       dest: "$HOME/.config/nvim/custom_snippets/rails.snippets"
+      state: link
+      force: yes
+
+  - name: Symlink the rails projection config file
+    file:
+      src: "$HOME/dotfiles-1/nvim/rails_projections.vim"
+      dest: "$HOME/.config/nvim/rails_projections.vim"
       state: link
       force: yes
 

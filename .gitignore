@@ -4,6 +4,7 @@
 *.swp
 .vim/.undodir/
 .vim/Session.vim
+.solargraph.yml
 .undodir/
 Session.vim
 .DS_Store
@@ -20,3 +21,6 @@ tags.temp
 */.tern-port
 *@neomake*.rb
 temp.sql
+app/services/ignore_service.rb
+.keep
+.ruby_version

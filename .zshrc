@@ -1,7 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/vivekkumar/.oh-my-zsh
 
-ZSH_THEME="cobalt2"
+ZSH_THEME="spaceship"
+# ZSH_THEME="cobalt2"
 COMPLETION_WAITING_DOTS="true"
 plugins=(git docker-rails zsh-autosuggestions short-dir zsh-completions)
 
@@ -50,6 +51,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias cat='bat'
 alias help='tldr'
 alias be='bundle exec'
+alias specb='bundle exec rspec'
+alias ctags='/usr/local/Cellar/universal-ctags/HEAD-befcb88/bin/ctags'
+alias rspec50='for i in `seq 50` ; do rspec spec/controllers/stages_controller_spec.rb ; [[ ! $? = 0 ]] && break ; done'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -59,9 +63,13 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
 
-LESSPIPE=`which src-hilite-lesspipe.sh`
-export LESSOPEN="| ${LESSPIPE} %s"
-export LESS=' -R -X -F '
+# LESSPIPE=`which src-hilite-lesspipe.sh`
+# export LESSOPEN="| ${LESSPIPE} %s"
+# export LESS=' -R -X -F '
 
 # load rbenv
 eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
