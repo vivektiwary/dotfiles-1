@@ -17,68 +17,14 @@
     homebrew_cask:
       name: font-firacode-nerd-font
 
-  # - name: Install neovim
-  #   homebrew:
-  #     name: neovim
-
-  # - name: Check if imagemagic is present
-  #   command: brew ls --versions imagemagick
-  #   register: result
-  #   ignore_errors: True
-
-  - name: Unlink imagemagic if any
+  - name: Install neovim
     homebrew:
-      name: 'imagemagick'
-      state: unlinked
-    ignore_errors: True
-
-  - name: Install imagemagic 6, as it is compatible with rmagic gem
-    homebrew:
-      name: 'imagemagick@6'
-
-  - name: Force link imagemagic 6
-    homebrew:
-      name: 'imagemagick@6'
-      state: linked
-
-  - name: Install universal ctags which is the maintained version of exeburant ctags
-    homebrew:
-      name: 'universal-ctags/universal-ctags/universal-ctags'
-      state: head
+      name: neovim
+      install_options: HEAD
 
   - name: Install other utilities
     homebrew:
-      name: [
-        'ruby',
-        'rbenv',
-        'zsh-syntax-highlighting',
-        'fortune',
-        'node',
-        'diff-so-fancy',
-        'ninja',
-        'libtool',
-        'automake',
-        'cmake',
-        'pkg-config',
-        'gettext',
-        'postgresql'
-      ]
-
-  - name: Install bat which is a better alternative for cat
-    homebrew:
-      name: bat
-
-  - name: Install htop which is a better alternative for top
-    homebrew:
-      name: htop
-
-  - name: Install fd which is a better alternative for find
-    homebrew:
-      name: fd
-
-  - name: Install tldr which is a better alternative for help
-    homebrew:
-      name: tldr
+      name: ['ruby', 'rbenv', 'zsh-syntax-highlighting', 'ctags', 'fortune', 'node', 'diff-so-fancy']
 
   - name: Add node support for neovim
     npm:
@@ -94,10 +40,6 @@
       name: neovim
       executable: pip3
 
-  - name: Browse gem source code with vim
-    gem:
-      name: 'gem-ctags'
-
   - name: Remove the default zshrc file
     file:
       path: ~/.zshrc
@@ -108,29 +50,13 @@
       path: ~/.config/nvim/
       state: directory
 
-  - name: Create custom_snippets directory for neovim
-    file:
-      path: ~/.config/nvim/custom_snippets/
-      state: directory
-
-  - name: Create .ctags.d directory
-    file:
-      path: ~/.ctags.d/
-      state: directory
-
-  - name: Symlink the common.ctags files for ctags
-    file:
-      src: "$HOME/dotfiles-1/common.ctags"
-      dest: "$HOME/.ctags.d/common.ctags"
-      state: link
-      force: yes
-
-  - name: Symlink the config files for zsh and neovim
+  - name: Symlink the config file for zsh
     file:
       src: "$HOME/dotfiles-1/.zshrc"
       dest: "$HOME/.zshrc"
       state: link
       force: yes
+      follow: false
 
   - name: Symlink the cobalt theme to oh my zsh
     file:
@@ -138,6 +64,7 @@
       dest: "$ZSH/themes/cobalt2.zsh-theme"
       state: link
       force: yes
+      follow: false
 
   - name: Clone zsh-autosuggestions to oh-my-zsh
     git:
@@ -149,72 +76,32 @@
       repo: https://github.com/zsh-users/zsh-completions
       dest: "$ZSH/custom/plugins/zsh-completions"
 
-  - name: Clone spaceship-prompt to oh-my-zsh
-    git:
-      repo: https://github.com/denysdovhan/spaceship-prompt
-      dest: "$ZSH/custom/themes/spaceship-prompt"
-
-  - name: Symlink spaceship theme to zsh
-    file:
-      src: "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme"
-      dest: "$ZSH/custom/themes/spaceship.zsh-theme"
-      state: link
-      force: yes
-
-  - name: get the afterglow themeto home directory
+  - name: get the afterglow theme to the home directory
     get_url:
       url: https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Afterglow.itermcolors
       dest: "$HOME/Afterglow.itermcolors"
 
+  - name: Specify the preferences directory for iterm2 preferences
+    command: defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles-1/iterm2"
+
+  - name: Tell iTerm2 to use the custom preferences in the above specifed directory
+    command: defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
   - name: Symlink the neovim config files
     file:
-      src: "$HOME/dotfiles-1/nvim/init.vim"
-      dest: "$HOME/.config/nvim/init.vim"
+      src: "$HOME/dotfiles-1/nvim/{{ item.src }}"
+      dest: "$HOME/.config/nvim/{{ item.dest }}"
       state: link
       force: yes
-
-  - name: Symlink the neovim config files dealing with general settings
-    file:
-      src: "$HOME/dotfiles-1/nvim/general.vim"
-      dest: "$HOME/.config/nvim/general.vim"
-      state: link
-      force: yes
-
-  - name: Symlink the part of neovim config dealing with plugins
-    file:
-      src: "$HOME/dotfiles-1/nvim/plugins.vim"
-      dest: "$HOME/.config/nvim/plugins.vim"
-      state: link
-      force: yes
-
-  - name: Symlink the part of neovim config dealing with keys binding
-    file:
-      src: "$HOME/dotfiles-1/nvim/keys.vim"
-      dest: "$HOME/.config/nvim/keys.vim"
-      state: link
-      force: yes
-
-  - name: Symlink the part of neovim config dealing with custom commands
-    file:
-      src: "$HOME/dotfiles-1/nvim/custom_commands.vim"
-      dest: "$HOME/.config/nvim/custom_commands.vim"
-      state: link
-      force: yes
-
-  - name: Symlink snippets for rails
-    file:
-      src: "$HOME/dotfiles-1/nvim/custom_snippets/rails.snippets"
-      dest: "$HOME/.config/nvim/custom_snippets/rails.snippets"
-      state: link
-      force: yes
-
-  - name: Symlink the rails projection config file
-    file:
-      src: "$HOME/dotfiles-1/nvim/rails_projections.vim"
-      dest: "$HOME/.config/nvim/rails_projections.vim"
-      state: link
-      force: yes
-
+      follow: false
+    with_items:
+      - { src: init.vim, dest: init.vim }
+      - { src: general.vim, dest: general.vim }
+      - { src: custom_commands.vim, dest: custom_commands.vim }
+      - { src: keys.vim, dest: keys.vim }
+      - { src: plugins.vim, dest: plugins.vim }
+      - { src: rails_projections.vim, dest: rails_projections.vim }
+      - { src: vim_settings.vim, dest: vim_settings.vim }
 
   - name: Symlink the neovim colorscheme
     file:
@@ -222,22 +109,15 @@
       dest: "$HOME/.config/nvim/colors"
       state: link
       force: yes
-
-  - name: Initialize z on shell init
-    lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
-
-  - name: Alias cat for bat
-    lineinfile: dest=~/.zshrc line="alias cat='bat'"
-
-  - name: Alias man for tldr
-    lineinfile: dest=~/.zshrc line="alias help='tldr'"
+      follow: false
 
   - name: Symlink the gitignore file
     file:
-      src: "$HOME/dotfiles-1/.gitignore"
+      src: "$HOME/dotfiles-1/global_gitignore"
       dest: "$HOME/.gitignore_global"
       state: link
       force: yes
+      follow: false
 
   - name: Symlink the git_template directory
     file:
@@ -245,6 +125,7 @@
       dest: "$HOME/.git_template"
       state: link
       force: yes
+      follow: false
 
   - name: Symlink the git config file
     file:
@@ -252,17 +133,25 @@
       dest: "$HOME/.gitconfig"
       state: link
       force: yes
+      follow: false
 
-  - name: Symlink the short dir alias file
-    file:
-      src: "$HOME/dotfiles-1/short-dir.zsh"
-      dest: "$ZSH/custom/short-dir.zsh"
-      state: link
-      force: yes
+      #  - name: Symlink the short dir alias file
+      #    file:
+      #      src: "$HOME/dotfiles-1/short-dir.zsh"
+      #      dest: "$ZSH/custom/short-dir.zsh"
+      #      state: link
+      #      force: yes
+      #      follow: false
+      #
+      #  - name: Symlink the docker alias file
+      #    file:
+      #      src: "$HOME/dotfiles-1/docker-rails.zsh"
+      #      dest: "$ZSH/custom/docker-rails.zsh"
+      #      state: link
+      #      force: yes
+      #      follow: false
 
-  - name: Symlink the docker alias file
-    file:
-      src: "$HOME/dotfiles-1/docker-rails.zsh"
-      dest: "$ZSH/custom/docker-rails.zsh"
-      state: link
-      force: yes
+  - name: Uninstall the ruby installed by homebrew
+    homebrew:
+      name: ruby
+      state: absent

@@ -1,10 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/vivekkumar/.oh-my-zsh
+export ZSH=/Users/akanksha/.oh-my-zsh
 
-ZSH_THEME="spaceship"
-# ZSH_THEME="cobalt2"
+# ZSH_THEME="spaceship"
+ZSH_THEME="cobalt2"
 COMPLETION_WAITING_DOTS="true"
-plugins=(git docker-rails zsh-autosuggestions short-dir zsh-completions)
+# plugins=(git docker-rails zsh-autosuggestions short-dir zsh-completions)
+plugins=(git zsh-autosuggestions zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -46,7 +47,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
-. `brew --prefix`/etc/profile.d/z.sh
+#. `brew --prefix`/etc/profile.d/z.sh
 
 alias cat='bat'
 alias help='tldr'
@@ -69,6 +70,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # load rbenv
 eval "$(rbenv init -)"
+
+# Aliases for changing the java version for a particular project
+alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
+alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

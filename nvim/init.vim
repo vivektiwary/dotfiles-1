@@ -183,9 +183,9 @@ call plug#end()
 
 " color janah
 " colorscheme hybrid_material
-color molokai
+" color molokai
 " color vividchalk
-set background=dark                                                             "Set background to dark
+" set background=dark                                                             "Set background to dark
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
@@ -198,5 +198,6 @@ source ~/.config/nvim/plugins.vim " Settings for the plugins
 source ~/.config/nvim/keys.vim " Settings for custom key mapping
 source ~/.config/nvim/custom_commands.vim
 
+set background=light
 " project wise vimrc file
 set exrc
