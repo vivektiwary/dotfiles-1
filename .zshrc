@@ -5,7 +5,7 @@ export ZSH=/Users/akanksha/.oh-my-zsh
 ZSH_THEME="cobalt2"
 COMPLETION_WAITING_DOTS="true"
 # plugins=(git docker-rails zsh-autosuggestions short-dir zsh-completions)
-plugins=(git zsh-autosuggestions zsh-completions)
+plugins=(git zsh-autosuggestions zsh-completions docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
