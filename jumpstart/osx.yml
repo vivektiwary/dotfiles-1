@@ -5,7 +5,7 @@
 
   tasks:
   - name: Install dev utilities
-    homebrew: name={{ item }}
+    homebrew: name = {{ item }}
     with_items:
       - vim
       - git
@@ -13,18 +13,18 @@
       - the_silver_searcher
       - zsh
       - z
-      - dnsmasq
+      #- dnsmasq
 
   - name: Install common softwares
     homebrew_cask: name={{ item }}
     with_items:
-      - google-chrome
-      - firefox
-      - slack
+      #- google-chrome
+      #- firefox
+      #- slack
       - iterm2
-      - sublime-text
+      #- sublime-text
       - alfred
-      - docker-edge
+      #- docker-edge
 
   - name: Install oh-my-zsh
     shell: curl -L http://install.ohmyz.sh | sh creates=~/.oh-my-zsh
@@ -33,7 +33,7 @@
     lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
 
   - name: Create src directory
-    file: path={{ ansible_user_dir }}/src/btt state=directory
+    file: path={{ ansible_user_dir }}/src/walmart state=directory
 
   - name: Setup sample gitconfig
     copy: src=file/.gitconfig dest={{ ansible_user_dir }}/.gitconfig

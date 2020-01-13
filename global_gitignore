@@ -25,3 +25,5 @@ temp.sql
 app/services/ignore_service.rb
 .keep
 .ruby_version
+node_modules/
+.vim/
